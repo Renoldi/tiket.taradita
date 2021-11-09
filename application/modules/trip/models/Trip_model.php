@@ -64,14 +64,13 @@ class Trip_model extends CI_Model {
 			->from('trip_route')
 			->where('status', 1)
 			->where('company_id', $this->session->userdata('company_id'))
-			->order_by('name', 'desc')
 			->get()
 			->result();
 
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->name] = $value->name;
+				$list[$value->id] = $value->name;
 			return $list;
 		} else {
 			return false; 
@@ -91,7 +90,7 @@ class Trip_model extends CI_Model {
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->start.' - '.$value->end] = $value->start.' - '.$value->end;
+				$list[$value->shedule_id] = $value->start.' - '.$value->end;
 			return $list;
 		} else {
 			return false; 

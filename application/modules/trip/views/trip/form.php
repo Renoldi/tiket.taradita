@@ -42,7 +42,7 @@ input[type=checkbox]:checked + label {
                     <div class="form-group row">
                         <label for="trip_title" class="col-sm-3 col-form-label"><?php echo display('trip_title') ?> *</label>
                         <div class="col-sm-9">
-                                    <textarea name="trip_title" id="trip_title" class="form-control"><?php echo $trips->trip_title; ?></textarea>
+                                    <textarea name="trip_title" class="form-control"><?php echo $trips->trip_title; ?></textarea>
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -116,18 +116,3 @@ input[type=checkbox]:checked + label {
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-
-$("select.trips_info").change(function () {
-    var selectedOptions = [];
-    $("select.trips_info").each(function(){
-        var title = $(this).val();
-        if($.trim(title)){
-            selectedOptions.push(title);
-        }
-    });
-    $("#trip_title").html(selectedOptions.join(' = '));
-});
-</script>

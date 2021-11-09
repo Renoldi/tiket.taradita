@@ -34,9 +34,9 @@ class Trip extends MX_Controller {
 		$shd = explode("-", $shels);
 		$strt = $shd[0];
 		$ends = $shd[1];
-		$routes = $this->db->select('*')->from('trip_route')->where('name',$this->input->post('route'))->get()->row();
+		$routes = $this->db->select('*')->from('trip_route')->where('id',$this->input->post('route'))->get()->row();
 		$types = $this->db->select('*')->from('fleet_type')->where('type',$this->input->post('types'))->get()->row();
-		$shedule = $this->db->select('*')->from('shedule')->where('start',$strt)->get()->row();
+		$shedule = $this->db->select('*')->from('shedule')->where('shedule_id',$this->input->post('shedule'))->get()->row();
 		$fleet_category = $this->db->select('*')->from('fleet_category')->where('type',$this->input->post('fleet_category'))->get()->row();
 		$weekend = $this->input->post("weekend");
 		$weekday = implode(',' , $weekend);

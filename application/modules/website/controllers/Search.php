@@ -549,11 +549,10 @@ class Search extends MX_Controller
                 $multiArray[$key][] = $seat;
             }
 
-
+            $no = 0;
             foreach ($multiArray as $keyseats => $value) {
                 $data['seats'] .= "<div class=\"row\">";
-
-
+                $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
                 foreach ($value as $key => $value1) {
                     $data['seats'] .= "<div class=\"col-xs-2\">
                         <div class='" . (in_array($value1, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
@@ -565,19 +564,19 @@ class Search extends MX_Controller
                         </div>
                         </div>
                     </div> ";
-
-                    if ($keyseats == "A") {
-                        $data['seats'] .= "<div class=\"col-xs-2\">
-                <div class='seat ladies' data-item=\"\">
-                <div class=\"seat-body\">
-                    S
-                    <span class=\"seat-handle-left\"></span>
-                    <span class=\"seat-handle-right\"></span>
-                    <span class=\"seat-bottom\"></span>
-                </div>
-                </div>
-             </div> ";
-                    }
+                }
+                if ($keyseats == "A") {
+                    $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
+                    $data['seats'] .= "<div class=\"col-xs-2\">
+            <div class='seat ladies' data-item=\"\">
+            <div class=\"seat-body\">
+                S
+                <span class=\"seat-handle-left\"></span>
+                <span class=\"seat-handle-right\"></span>
+                <span class=\"seat-bottom\"></span>
+            </div>
+            </div>
+         </div> ";
                 }
                 $data['seats'] .= "</div>";
             }
@@ -716,12 +715,15 @@ class Search extends MX_Controller
                 $key = substr($seat, 0, 1);
                 $multiArray[$key][] = $seat;
             }
-
+            $no = 0;
             foreach ($multiArray as $keyseats => $value) {
                 $data['seats'] .= "<div class=\"row\">";
-
-
+                $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
+                if ($no == 1) {
+                    $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
+                }
                 foreach ($value as $key => $value1) {
+
                     $data['seats'] .= "<div class=\"col-xs-2\">
                         <div class='" . (in_array($value1, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
                         <div class=\"seat-body\">
@@ -732,24 +734,29 @@ class Search extends MX_Controller
                         </div>
                         </div>
                     </div> ";
-
-                    if ($keyseats == "A") {
-                        $data['seats'] .= "<div class=\"col-xs-2\">
-                <div class='seat ladies' data-item=\"\">
-                <div class=\"seat-body\">
-                    S
-                    <span class=\"seat-handle-left\"></span>
-                    <span class=\"seat-handle-right\"></span>
-                    <span class=\"seat-bottom\"></span>
-                </div>
-                </div>
-             </div> ";
+                    if ($no == 0) {
+                        $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
+                    } elseif ($no == 2) {
+                        $data['seats'] .= "<div class=\"col-xs-2\"></div> ";
                     }
                 }
+                if ($keyseats == "A") {
+                    $data['seats'] .= "<div class=\"col-xs-2\">
+                                    <div class='seat ladies' data-item=\"\">
+                                    <div class=\"seat-body\">
+                                        S
+                                        <span class=\"seat-handle-left\"></span>
+                                        <span class=\"seat-handle-right\"></span>
+                                        <span class=\"seat-bottom\"></span>
+                                    </div>
+                                    </div>
+                                </div> ";
+                }
                 $data['seats'] .= "</div>";
+                $no++;
             }
 
-             
+
 
             // $data['seats'] .= "<div class=\"row\">";
             // $data['seats'] .= "<div class=\"col-xs-2\">

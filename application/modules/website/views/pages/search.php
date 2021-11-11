@@ -433,6 +433,8 @@
                 dataType: 'json',
                 data: frm.serialize(),
                 success: function(data) {
+                    console.log(data);
+
                     if (data.status == true) {
                         // outputPreview.empty().html(data.message).addClass('alert-success').removeClass('alert-danger').removeClass('hide');
                         $('.modal-body').html(data.payment);
@@ -442,6 +444,7 @@
                 },
                 error: function(xhr) {
                     alert('test!');
+                    console.log(xhr);
                 }
             });
         });
@@ -513,6 +516,7 @@
             var countSeats = 0;
             var child = $('#child_no').val();
             var adult = $('#adult').val();
+            var prcss = $('#prcss').text();
             // var special = $('#special').val();
             $("div[data-item=selected]").each(function(i, x) {
                 countSeats = i + 1;
@@ -521,6 +525,12 @@
                 console.log(countSeats);
             });
             $('#adult').val(countSeats);
+            $('#adult').val(countSeats);
+            total = countSeats * prcss;
+            price.val(total);
+
+            $('#totalPreview').html(total);
+            $('#grandTotalPreview').html(total);
 
             total_seat.val(countSeats);
             seat_number.val(seatSerial);

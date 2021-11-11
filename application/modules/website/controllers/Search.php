@@ -392,7 +392,8 @@ class Search extends MX_Controller
         $data['fleet_type_id'] = $fleet_type_id;
         $data['booking_date']  = $booking_date;
         $pricess = $this->db->select('*')->from('pri_price')->where('route_id', $trip_route_id)->get()->row();
-        $data['child_pric'] = $currency->currency . ' ' . $pricess->price;
+        // $data['child_pric'] = $currency->currency . ' ' . $pricess->price;
+        $data['child_pric'] =  $pricess->price;
         $data['bankinfo']      = $this->db->select('*')->from('bank_info')->get()->result();
 
 
@@ -1224,24 +1225,24 @@ class Search extends MX_Controller
         $bookArray = array_map('trim', explode(',', $bookedSeats->booked_serial));
 
         //-----------------booked seats-------------------
-        // $newSeatArray = array();
-        // $newSeatArray = array_map('trim', explode(',', $newSeats));
+        $newSeatArray = array();
+        $newSeatArray = array_map('trim', explode(',', $newSeats));
 
-        // if (sizeof($newSeatArray) > 0) {
+        if (sizeof($newSeatArray) > 0) {
 
-        //     foreach ($newSeatArray as $seat) {
-        //         if (!empty($seat)) {
-        //             if (in_array($seat, $bookArray)) {
-        //                 return false;
-        //             } else if (!in_array($seat, $seatArray)) {
-        //                 return false;
-        //             }
-        //         }
-        //     }
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+            foreach ($newSeatArray as $seat) {
+                if (!empty($seat)) {
+                    if (in_array($seat, $bookArray)) {
+                        return false;
+                    } else if (!in_array($seat, $seatArray)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

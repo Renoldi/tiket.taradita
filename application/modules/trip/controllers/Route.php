@@ -47,7 +47,7 @@ class Route extends MX_Controller {
 		#-------------------------------#
 		$data['route'] = (Object) $postData = [
 			'id' 	 => $this->input->post('id'), 
-			'name' 	 => $this->input->post('name').' ('.$this->session->userdata('company_id').')', 
+			'name' 	 => $this->input->post('name'), 
 			'start_point' 	 => $this->input->post('start_point'), 
 			'end_point' 	 => $this->input->post('end_point'), 
 			'stoppage_points' 	 => $stopagp,

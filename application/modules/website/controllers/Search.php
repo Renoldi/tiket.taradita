@@ -248,14 +248,13 @@ class Search extends MX_Controller
         $password = (!empty($this->input->post('old_password')) ? $this->input->post('old_password') : md5($this->input->post('password')));
 
         $passenger_id = (!empty($this->input->post('passenger_id_no')) ? $this->input->post('passenger_id_no') : $this->input->post('passenger_id_no'));
-        $nid =  $this->input->post('p_nid');
         $nid1 =  $this->input->post('p_nid1');
         #--------------------------------------
         $bhistory = array(
             'tkt_passenger_id_no' => $passenger_id,
         );
         $userData = array(
-            'id_no'           => $passenger_id,
+            'id_no'           => rand(),
             'firstname'       => $this->input->post('firstname'),
             'lastname'        => $this->input->post('lastname'),
             'email'           => $this->input->post('email'),
@@ -263,7 +262,7 @@ class Search extends MX_Controller
             'phone'           => $this->input->post('phone'),
             'address_line_1'  => $this->input->post('address_line_1'),
             'status'          => 1,
-            'nid'             => $nid,
+            'nid'             => $this->input->post('nid'),
         );
 
         $this->db->where('id_no', $this->input->post('booking_id_no', true))
@@ -272,10 +271,12 @@ class Search extends MX_Controller
         foreach ($this->input->post('firstname1') as $key => $val) {
             $postData[] = array(
                 'id_no'           => $passenger_id,
+                'email'           => $this->input->post('email'),
                 'firstname'       => $this->input->post('firstname1')[$key],
                 'lastname'        => $this->input->post('lastname1')[$key],
                 'status'          => 1,
-                'nid'             => $nid1[$key]
+                'nid'             => $nid1[$key],
+                'created_by'      => $this->input->post('nid')
             );
         }
 

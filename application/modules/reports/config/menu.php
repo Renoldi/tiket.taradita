@@ -10,7 +10,7 @@ $HmvcMenu["reports"] = array(
         "controller" => "booking",
         "method"     => "report",
         "permission" => "read"
-    ), 
+    ),
     
     // assign
     'assign'  => array( 
@@ -18,6 +18,18 @@ $HmvcMenu["reports"] = array(
         "method"     => "report",
         "permission" => "read"
     ), 
+    // vehicle
+    'vehicle'  => array( 
+        "controller" => "assign",
+        "method"     => "report_vehicle",
+        "permission" => "read"
+    ),
+    // vehicle trip
+    'trip'  => array( 
+        "controller" => "assign",
+        "method"     => "report_vehicle_trip",
+        "permission" => "read"
+    ),
      // agent log
     'agent_log'  => array( 
         "controller" => "agent",
@@ -25,9 +37,9 @@ $HmvcMenu["reports"] = array(
         "permission" => "read"
     ),
       // agent log
-    'ticket_sales'  => array( 
+    'sales_report'  => array( 
         "controller" => "sales_report",
-        "method"     => "report",
+        "method"     => "sales_report",
         "permission" => "read"
     ),
   

@@ -104,7 +104,7 @@
                 </div>  
                 
      <div class="col-sm-8">
-        <div class="list_carousel">
+        <!-- <div class="list_carousel">
                 <ul id="foo0">
                     <li><img src="<?php echo base_url('application/modules/website/assets/images/banner1.jpg') ?>" alt=""></li>
                     <li><img src="<?php echo base_url('application/modules/website/assets/images/banner2.jpg') ?>" alt=""></li>
@@ -112,7 +112,7 @@
                     <li><img src="<?php echo base_url('application/modules/website/assets/images/banner4.jpg') ?>" alt=""></li>                    
                </ul>
             <div class="clearfix"></div>
-        </div>
+        </div> -->
         </div>
         <br />
 

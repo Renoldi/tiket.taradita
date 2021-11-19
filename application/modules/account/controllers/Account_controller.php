@@ -8,7 +8,7 @@ class Account_controller extends MX_Controller {
         parent::__construct();
         $this->permission->module('account')->redirect();
         $this->load->model(array(
-            'account_model','price/price_model'
+            'account_model','trip/price_model'
         ));      
     }
    

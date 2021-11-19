@@ -60,6 +60,13 @@ $HmvcMenu["trip"] = array(
         ),
     ),
 
+    // Price
+    "price_list" => array(
+        'controller'  => "price",
+        'method'      => 'create_price',
+        'permission'  => 'read'
+    ),
+
     // assign
     "assigns" => array( 
         'add_assign'    => array( 

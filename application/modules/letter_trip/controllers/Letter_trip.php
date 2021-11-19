@@ -1,26 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Booking extends MX_Controller {
+class Letter_trip extends MX_Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 		
 		$this->load->model(array(
-            'booking_model','trip/price_model' 
+            'letter_trip_model','trip/price_model' 
 		));		 
 	}
  
-	public function report()
+	public function index()
 	{   
-        $this->permission->method('reports','read')->redirect();
-		$data['title']    = display('reports');  
+        $this->permission->method('letter_trip','read')->redirect();
+		$data['title']    = display('letter_trip');  
         #-------------------------------#
-        $config["base_url"]   = base_url('reports/booking/report');
+        $config["base_url"]   = base_url('letter_trip/index');
         $config['suffix'] = '?'.http_build_query($_GET, '', "&"); 
         $config['first_url'] = $config['base_url'].$config['suffix'];
-        $config["per_page"] = 10;
+        $config["per_page"] = 100;
         $config["uri_segment"] = 4;
          $currency_details = $this->price_model->retrieve_setting_editdata();
         foreach ($currency_details as $price) {
@@ -35,8 +35,6 @@ class Booking extends MX_Controller {
             'offset' => $page,
             'filter'     => trim($this->input->get('filter')),
             'trip'       => trim($this->input->get('trip')),
-            'route'      => trim($this->input->get('route')),
-            'driver'     => trim($this->input->get('driver')),
             'start_date' => (!empty($start_date)?trim($start_date):date('d-m-Y')),
             'end_date'   => (!empty($end_date)?trim($end_date):date('d-m-Y')),
         );
@@ -44,7 +42,7 @@ class Booking extends MX_Controller {
         #
         #pagination starts
         #
-        $config["total_rows"] = $this->booking_model->countRecord($data['search']);
+        $config["total_rows"] = $this->letter_trip_model->countRecord($data['search']);
         $config["last_link"] = "Last"; 
         $config["first_link"] = "First"; 
         $config['next_link'] = 'Next';
@@ -65,17 +63,18 @@ class Booking extends MX_Controller {
         $config['last_tagl_close'] = "</li>";
         /* ends of bootstrap */
         $this->pagination->initialize($config);
-        $data["bookings"] = $this->booking_model->read($data['search']);
+        $data["bookings"] = $this->letter_trip_model->read($data['search']);
+        $data["bookingss"] = $this->letter_trip_model->read1($data['search']);
         $data["links"] = $this->pagination->create_links();
         #
         #pagination ends
         #   
-        $data['routeList']  = $this->booking_model->routeList();
-        $data['tripList']   = $this->booking_model->tripList();
-        $data['driverList'] = $this->booking_model->driverList();
+        $data['routeList']  = $this->letter_trip_model->routeList();
+        $data['tripList']   = $this->letter_trip_model->tripList();
+        $data['driverList'] = $this->letter_trip_model->driverList();
          $data['currency']   = $currency;
-		$data['module'] = "reports";
-		$data['page']   = "booking/list";   
+		$data['module'] = "letter_trip";
+		$data['page']   = "index";   
 		echo Modules::run('template/layout', $data); 
 	}  
 }

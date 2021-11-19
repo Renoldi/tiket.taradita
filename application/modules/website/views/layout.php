@@ -57,26 +57,22 @@ defined('BASEPATH') OR exit('No direct script access allowed'); ?>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li><a href="<?php echo base_url('userlog') ?>"><i class="fa fa-print"></i><?php echo display('print_ticket') ?></a></li>
-                        <li><a href="<?php echo base_url('userlog') ?>"><i class="fal fa-times-hexagon"></i><?php echo display('cancel_ticket') ?></a></li>
-                        <li class="dropdown dropdown-user">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php 
+                    <li><a href="<?php echo base_url('/') ?>">Home</a></li>
+                        <?php 
              if(empty($this->session->userdata('id_no'))){
-                echo display('login');
+                
              }else{
                echo  $username=$this->session->userdata('firstname');
              }
 
-                 ?></a>
-                <ul class="dropdown-menu">
+                 ?>
                     <?php if(empty($this->session->userdata('id_no'))){ ?>
-                    <li><a href="<?php echo base_url('userlog') ?>"><i class="pe-7s-users"></i> User Login</a></li>
-                    <li><a href="<?php echo base_url('login') ?>"><i class="pe-7s-settings"></i> Admin Login</a></li>
+                    <li><a href="<?php echo base_url('userlog') ?>"><i class="pe-7s-users"></i> Login</a></li>
                     <?php }else{ ?>
+                        <li><a href="<?php echo base_url('userlog') ?>"><i class="fa fa-print"></i><?php echo display('print_ticket') ?></a></li>
+                        <li><a href="<?php echo base_url('userlog') ?>"><i class="fal fa-times-hexagon"></i><?php echo display('cancel_ticket') ?></a></li>
                     <li><a href="<?php echo base_url('pass_logout') ?>"><i class="pe-7s-key"></i>  <?php echo display('logout') ?></a></li>
                     <?php } ?>
-                </ul>
-            </li>
 
 <li> <?= form_dropdown('language',$languageList,$appSetting->language, ' id="language"') ?></li>
           

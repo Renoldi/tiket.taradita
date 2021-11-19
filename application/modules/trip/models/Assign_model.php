@@ -294,17 +294,18 @@ public function create_shedule($data = [])
 
 	public function trip_dropdown()
 	{
-		$data = $this->db->select("*")
+		$data = $this->db->select("*, shedule.start AS start, shedule.end AS end")
 			->from("trip")
+			->join("shedule", "shedule.shedule_id = trip.shedule_id", "left")
 			->where('status', 1) 
-			->where('company_id', $this->session->userdata('company_id'))
+			->where('trip.company_id', $this->session->userdata('company_id'))
 			->get()
 			->result();
 
 		$list[''] = display('select_option');
 		if (!empty($data)) {
 			foreach($data as $value)
-				$list[$value->trip_id] = $value->trip_title;
+				$list[$value->trip_id] = $value->trip_title.' '.$value->start.'-'.$value->end;
 			return $list;
 		} else {
 			return false; 

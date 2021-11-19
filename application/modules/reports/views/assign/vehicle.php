@@ -4,24 +4,22 @@
             <div class="panel-heading">
                 <div class="panel-title">
                     <h4>
-                        <a href="<?php echo base_url('reports/assign/report') ?>" class="btn btn-sm btn-success" title="List"><i class="fa fa-list"></i> <?php echo display('assign') ?></a>  
+                        <a href="<?php echo base_url('reports/booking/report') ?>" class="btn btn-sm btn-success" title="List"><i class="fa fa-list"></i> <?php echo display('booking') ?></a>  
                     </h4>
                 </div>
             </div>
             <div class="panel-body">
-
+ 
                 <div class="col-sm-12" style="margin-bottom:20px">
-                    <?php echo form_open('reports/booking/report', 'class="form-horizontal" method="get"')?>
+                    <?php echo form_open('reports/assign/report_vehicle', 'class="form-horizontal" method="get"')?>
 
                         <!-- Filter -->
                         <div class="form-group">
                             <?php 
-                            $filterList = array(
-                                'all'    => display('all'),
-                                'trip'   => display('trip_name'),
-                                'route'  => display('route_name'),
-                                'driver' => display('driver_name'),
-                            );
+                                $filterList = array(
+                                    'all'    => display('all'),
+                                    'fleet' => display('reg_no'),
+                                );
                             ?>
                             <label for="filter" class="col-sm-2 control-label"><?php echo display('filter') ?></label>
                             <div class="col-sm-10">
@@ -29,27 +27,11 @@
                             </div>
                         </div>
 
-                        <!-- Trip ID -->
-                        <div class="form-group hide" id="trip">
-                            <label for="trip_id" class="col-sm-2 control-label"><?php echo display('trip_name') ?></label>
+                        <!-- Fleet Name -->
+                        <div class="form-group hide" id="fleet">
+                            <label for="fleet" class="col-sm-2 control-label"><?php echo display('reg_no') ?></label>
                             <div class="col-sm-10">
-                                 <?php echo form_dropdown('trip', $tripList,  $search->trip, "class='form-control' id='trip_id' style='width:100%'") ?>
-                            </div>
-                        </div>
-
-                        <!-- Route Name -->
-                        <div class="form-group hide" id="route">
-                            <label for="route_id" class="col-sm-2 control-label"><?php echo display('route_name') ?></label>
-                            <div class="col-sm-10">
-                                <?php echo form_dropdown('route', $routeList,  $search->route, "class='form-control' id='route_id' style='width:100%'") ?>
-                            </div>
-                        </div>
-
-                        <!-- Driver Name -->
-                        <div class="form-group hide" id="driver">
-                            <label for="driver_id" class="col-sm-2 control-label"><?php echo display('driver_name') ?></label>
-                            <div class="col-sm-10">
-                                <?php echo form_dropdown('driver', $driverList,  $search->driver, "class='form-control' id='driver_id' style='width:100%'") ?>
+                                <?php echo form_dropdown('fleet', $fleetList,  $search->fleet, "class='form-control' id='fleet' style='width:100%'") ?>
                             </div>
                         </div>
 
@@ -75,67 +57,73 @@
                     <?php echo form_close() ?>
                 </div> 
 
-                <div class="col-sm-12">
-                     <div class="table-responsive">
-                    <table class="bookingDataTable table table-bordered ">
+
+
+                <div class="col-sm-12 table-responsive">
+                    <table class="tripAsignDataTable table table-bordered ">
                         <thead>
                             <tr>
                                 <th><?php echo display('sl_no') ?></th>
-                                <th><?php echo display('booking_date') ?></th>
-                                <th><?php echo display('booking_id') ?></th>
                                 <th><?php echo display('trip_name') ?></th>
+                                <th><?php echo display('reg_no') ?></th>
                                 <th><?php echo display('route_name') ?></th>
+                                <th><?php echo display('start_date') ?></th>
+                                <th><?php echo display('end_date') ?></th>
                                 <th><?php echo display('driver_name') ?></th>
-                                <th>Kendaraan</th>
-                                <th><?php echo display('total_seat') ?></th>
-                                <th><?php echo display('price') ?></th>
-                                <th><?php echo display('discount') ?></th>
-                                <th><?php echo display('amount') ?></th>
-                            </tr>
+                                <th><?php echo display('sold_ticket') ?></th>
+                                <th><?php echo display('total_income') ?></th>
+                                <th><?php echo display('total_expense') ?></th>
+                                <th><?php echo display('total_fuel') ?></th>
+                            </tr> 
                         </thead>
                         <tfoot>
-                            <tr>
+                            <tr> 
                                 <th colspan="7"></th>
-                                <th></th> 
-                                <th></th> 
                                 <th></th>
                                 <th></th>
-                            </tr>
+                                <th></th>
+                                <th></th>
+                            </tr> 
                         </tfoot>
                         <tbody>
-                            <?php if (!empty($bookings)) ?>
+                            <?php if (!empty($assigns)) ?>
                             <?php $sl = 1; ?>
-                            <?php foreach ($bookings as $booking) { ?>
-                            <tr class="<?php echo (!empty($booking->tkt_refund_id) ? "bg-danger" : null ) ?>">
+                            <?php foreach ($assigns as $assign) { ?>
+                            <tr class="<?php echo (!empty($assign->isClosed)?$assign->isClosed:null) ?>">
                                 <td><?php echo $sl++; ?></td>
-                                <td><?php echo $booking->booking_date; ?></td>
-                                <td><a target="_blank" href="<?php echo base_url("ticket/booking/view/$booking->id_no") ?>"><?php echo $booking->id_no; ?></a></td>
-                                <td><a target="_blank" href="<?php echo base_url("trip/assign/view/$booking->trip_id_no") ?>"><?php echo $booking->trip_title; ?></a></td>
-                                <td><?php echo $booking->route_name; ?></td>
-                                <td><a target="_blank" href="<?php echo base_url("/hr/hr_controller/emp_details/$booking->driver_id") ?>"><?php echo $booking->driver_name; ?></a></td>
-                                <td><?php echo $booking->reg_no; ?></td>
-                                <td><?php echo $booking->total_seat; ?></td>
-                                <td><?php echo $booking->price; ?></td>
-                                <td><?php echo $booking->discount; ?></td>
-                                <td><?php echo ($booking->price-$booking->discount); ?></td>
+                                <td>
+                                    <?php if(!$assign->isClosed): ?>
+                                    <a target="_blank" href="<?php echo base_url("trip/assign/view/$assign->id_no") ?>"><?php echo $assign->trip_title; ?></a>
+                                    <?php else: ?>
+                                        <a target="_blank" href="<?php echo base_url("trip/close/view/$assign->id_no") ?>"><?php echo $assign->id_no; ?></a>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo $assign->reg_no; ?></td>
+                                <td><?php echo $assign->trip_route_name; ?></td>
+                                <td><?php echo $assign->start_date; ?></td>
+                                <td><?php echo $assign->end_date; ?></td>
+                                <td><a target="_blank" href="<?php echo base_url("/hr/hr_controller/emp_details/$assign->driver_id") ?>"><?php echo $assign->driver_name; ?></a></td>
+                                <td><?php echo $assign->sold_ticket; ?></td>
+                                <td><?php echo $assign->total_income; ?></td>
+                                <td><?php echo $assign->total_fuel; ?></td>
+                                <td><?php echo $assign->total_expense; ?></td>
                             </tr>
                             <?php } ?> 
                         </tbody>
                     </table>
                     <?= $links ?>
                 </div>
-                </div>
             </div> 
         </div>
     </div>
 </div>
 
-
-<script type="text/javascript">
+ <script type="text/javascript">
 $(document).ready(function() {
 
     var q = '<?php echo $this->input->get("filter") ?>';
     var route  = $("#route");
+    var fleet  = $("#fleet");
     var trip   = $("#trip");
     var driver = $("#driver");
 
@@ -144,6 +132,8 @@ $(document).ready(function() {
             route.removeClass('hide');
         } else if (q == "trip") {
             trip.removeClass('hide');
+        }  else if (q == "fleet") {
+            fleet.removeClass('hide');
         } else if (q == "driver") {
             driver.removeClass('hide');
         } 
@@ -152,6 +142,7 @@ $(document).ready(function() {
     $('#filter').on('change', function(){
         var filter = $(this);
         route.addClass('hide');
+        fleet.addClass('hide');
         trip.addClass('hide');
         driver.addClass('hide');
 
@@ -160,6 +151,8 @@ $(document).ready(function() {
                 route.removeClass('hide');
             } else if (filter.val() == "trip") {
                 trip.removeClass('hide');
+            }  else if (filter.val() == "fleet") {
+                fleet.removeClass('hide');
             } else if (filter.val() == "driver") {
                 driver.removeClass('hide');
             } 
@@ -167,7 +160,7 @@ $(document).ready(function() {
     });
 
 
-    $('.bookingDataTable').DataTable( {
+    $('.tripAsignDataTable').DataTable( {
         searching: true, 
         responsive: false, 
         paging: false,
@@ -186,26 +179,26 @@ $(document).ready(function() {
                 return typeof i === 'string' ? i.replace(/[\$,]/g, '')*1:typeof i === 'number' ? i : 0;
             };  
             //#----------- Total over this page------------------#
-            seats = api.column(7, { page: 'current'} ).data().reduce( function (a, b) {
+            sold_ticket = api.column(7, { page: 'current'} ).data().reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                },0);   
+            total_income = api.column(8, { page: 'current'} ).data().reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 },0);  
-            price = api.column(8, { page: 'current'} ).data().reduce( function (a, b) {
+            total_expense = api.column(9, { page: 'current'} ).data().reduce( function (a, b) {
                     return intVal(a) + intVal(b);
-            },0);  
-            discount = api.column(9, { page: 'current'} ).data().reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                },0);  
-            grandTotal = api.column(10, { page: 'current'} ).data().reduce( function (a, b) {
+                },0); 
+            total_fuel = api.column(10, { page: 'current'} ).data().reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 },0); 
             //#-----------ends of Total over this page------------------#
 
             // Update footer
-            $( api.column(7).footer()).html(seats);
-            $( api.column(8).footer()).html(price.toFixed(2));
-            $( api.column(9).footer()).html(discount.toFixed(2));
-            $( api.column(10).footer()).html(grandTotal.toFixed(2));
+            $( api.column(7).footer()).html(sold_ticket.toFixed(2));
+            $( api.column(8).footer()).html(total_income.toFixed(2));
+            $( api.column(9).footer()).html(total_expense.toFixed(2));
+            $( api.column(10).footer()).html(total_fuel.toFixed(2));
         }
     });
-});
+}); 
 </script>

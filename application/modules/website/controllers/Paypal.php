@@ -6,7 +6,7 @@ class Paypal extends CI_Controller
         parent::__construct();
         $this->load->library('paypal_lib'); 
          $this->load->model(array(
-            'price/price_model',
+            'trip/price_model',
             'Website/website_model'
         ));
     }

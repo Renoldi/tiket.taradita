@@ -1,26 +1,16 @@
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="panel panel-bd lobidrag">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    <h4>
-                        <a href="<?php echo base_url('reports/assign/report') ?>" class="btn btn-sm btn-success" title="List"><i class="fa fa-list"></i> <?php echo display('assign') ?></a>  
-                    </h4>
-                </div>
-            </div>
-            <div class="panel-body">
+           <div class="panel-body">
 
                 <div class="col-sm-12" style="margin-bottom:20px">
-                    <?php echo form_open('reports/booking/report', 'class="form-horizontal" method="get"')?>
+                    <?php echo form_open('letter_trip/index', 'class="form-horizontal" method="get"')?>
 
                         <!-- Filter -->
                         <div class="form-group">
                             <?php 
                             $filterList = array(
-                                'all'    => display('all'),
-                                'trip'   => display('trip_name'),
-                                'route'  => display('route_name'),
-                                'driver' => display('driver_name'),
+                                'trip'   => display('trip_name')
                             );
                             ?>
                             <label for="filter" class="col-sm-2 control-label"><?php echo display('filter') ?></label>
@@ -30,26 +20,10 @@
                         </div>
 
                         <!-- Trip ID -->
-                        <div class="form-group hide" id="trip">
+                        <div class="form-group" id="trip">
                             <label for="trip_id" class="col-sm-2 control-label"><?php echo display('trip_name') ?></label>
                             <div class="col-sm-10">
                                  <?php echo form_dropdown('trip', $tripList,  $search->trip, "class='form-control' id='trip_id' style='width:100%'") ?>
-                            </div>
-                        </div>
-
-                        <!-- Route Name -->
-                        <div class="form-group hide" id="route">
-                            <label for="route_id" class="col-sm-2 control-label"><?php echo display('route_name') ?></label>
-                            <div class="col-sm-10">
-                                <?php echo form_dropdown('route', $routeList,  $search->route, "class='form-control' id='route_id' style='width:100%'") ?>
-                            </div>
-                        </div>
-
-                        <!-- Driver Name -->
-                        <div class="form-group hide" id="driver">
-                            <label for="driver_id" class="col-sm-2 control-label"><?php echo display('driver_name') ?></label>
-                            <div class="col-sm-10">
-                                <?php echo form_dropdown('driver', $driverList,  $search->driver, "class='form-control' id='driver_id' style='width:100%'") ?>
                             </div>
                         </div>
 
@@ -76,7 +50,35 @@
                 </div> 
 
                 <div class="col-sm-12">
-                     <div class="table-responsive">
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>No Kendaraan</td>
+                                <td>: <?php echo $bookingss->reg_no; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Nama Sopir / Telfon</td>
+                                <td>: <?php echo $bookingss->driver_name; ?> / <?php echo $bookingss->phone; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Dari</td>
+                                <td>: <?php echo $bookingss->start_point; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tujuan</td>
+                                <td>: <?php echo $bookingss->end_point; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Jumlah Penumpang</td>
+                                <td>: <?php echo $bookingss->total_seat; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-responsive">
                     <table class="bookingDataTable table table-bordered ">
                         <thead>
                             <tr>
@@ -135,9 +137,7 @@
 $(document).ready(function() {
 
     var q = '<?php echo $this->input->get("filter") ?>';
-    var route  = $("#route");
     var trip   = $("#trip");
-    var driver = $("#driver");
 
     if (q != null) {
         if (q == "route") {
@@ -171,7 +171,7 @@ $(document).ready(function() {
         searching: true, 
         responsive: false, 
         paging: false,
-        pageLength: 10,
+        pageLength: 100,
         dom: "<'row'<'col-sm-8'B><'col-sm-4'f>>tp", 
         buttons: [  
             {extend: 'copy', className: 'btn-sm', footer: true}, 

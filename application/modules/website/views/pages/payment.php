@@ -64,7 +64,7 @@ $bank=$this->db->select('*')->from('bank_info')->get()->result();
                     </div>
                     <div class="col-sm-6">
                         <label>Identitas</label>
-                        <input type="text" name="nid" class="form-control" id="nid" placeholder="KTP/Passport"  value="<?php echo $this->session->userdata('p_nid'); ?>">
+                        <input type="text" name="nid" class="form-control" id="nid" placeholder="KTP/Passport"  value="<?php echo $this->session->userdata('nid'); ?>">
                     </div>
                 </div>
             </div>
@@ -343,7 +343,7 @@ $bank=$this->db->select('*')->from('bank_info')->get()->result();
                      document.getElementById("password").value = data.password;
                      document.getElementById("phone").value = data.phone;
                      document.getElementById("address").value = data.address;
-                     document.getElementById("nid").value = data.p_nid;
+                     document.getElementById("nid").value = data.nid;
                 }
             },
             error: function(xhr)

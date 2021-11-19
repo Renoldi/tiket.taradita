@@ -59,6 +59,10 @@ $bank=$this->db->select('*')->from('bank_info')->get()->result();
                         <td><?php echo (!empty($firstname1)?$firstname1:null) ?></td>
                         <td><?php echo (!empty($nid1)?$nid1:null) ?></td>
                     </tr>
+                    <tr>
+                        <td><?php echo (!empty($firstname1)?$firstname1:null) ?></td>
+                        <td><?php echo (!empty($nid1)?$nid1:null) ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -117,7 +121,7 @@ $bank=$this->db->select('*')->from('bank_info')->get()->result();
                 <input type="hidden" name="typepame" id="paytype" value="">
                 <!-- <button type="button" id="paypal_id" class="btn btn-block btn-primary" data-toggle="modal" data-target="#paypal_modal"  disabled=""><?php echo display('paypal') ?> </button>
                   <button type="button" id="cash_id" data-toggle="modal" data-target="#cash_modal" class="btn btn-block btn-primary"  disabled=""><?php echo display('cash') ?> </button> -->
-             <button type="button" id="bank_id" class="btn btn-block btn-primary" data-toggle="modal" data-target="#bank_modal" disabled=""><?php echo display('bank_transaction') ?> </button>
+             <button type="button" id="bank_id" class="btn btn-block btn-primary" data-toggle="modal" data-target="#bank_modal" disabled="">Bayar </button>
             </div>
 
         </div>     
@@ -269,7 +273,7 @@ $bank=$this->db->select('*')->from('bank_info')->get()->result();
                     </div> 
  
                     <div class="form-group row">
-                        <label for="trip_route_id" class="col-sm-4 col-form-label text-right"><?php echo display('enter_transaction_id'); ?>*</label>
+                        <label for="trip_route_id" class="col-sm-4 col-form-label text-right">Kode Transaksi Bank*</label>
                         <div class="col-sm-6">
                             <input type="text" name="tran_num" class="form-control" placeholder="Transaction Id" required>
                         </div>

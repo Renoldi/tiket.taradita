@@ -103,9 +103,8 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th><?php echo display('seat_name'); ?></th>
-                                            <th><?php echo display('adult'); ?></th>
-                                            <th><?php echo display('child'); ?></th>
+                                            <th><?php echo display('seat_number'); ?></th>
+                                            <th><?php echo display('passenger'); ?></th>
                                             <th class="text-right"><?php echo display('amount'); ?></th>
                                         </tr>
                                     </thead>
@@ -118,13 +117,12 @@
                                         <tr>
                                             <td><?php echo (!empty($ticket->seat_serial)?(str_replace(',', ', ', $ticket->seat_serial)):null) ?></td>
                                             <td><?php echo (!empty($ticket->adult)?$ticket->adult:0) ?></td>
-                                            <td><?php echo (!empty($ticket->child)?$ticket->child:0) ?></td>
-                                            <th class="text-right"><?php echo $price = (!empty($ticket->price)?$ticket->price-$total_commission:0) ?> <?php echo $currency; ?></th>
+                                            <th class="text-right"><?php echo $currency; ?> <?php echo $price = (!empty($ticket->price)?$ticket->price-$total_commission:0) ?></th>
                                         </tr>
                                         <tr>
                                             <td colspan="3"></td>
                                             <th  class="text-right"><?php echo display('grand_total'); ?></th>
-                                            <th class="text-right"><?php echo $price-$discount+$total_commission ?> <?php echo $currency; ?></th>
+                                            <th class="text-right"><?php echo $currency; ?> <?php echo $price-$discount+$total_commission ?></th>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -29,7 +29,7 @@
                 <section class="content-header">
                     <div class="header-icon"><i class="pe-7s-home"></i></div>
                     <div class="header-title">
-                        <h1><?php echo (!empty($this->uri->segment(1))?ucfirst($this->uri->segment(1)):null) ?> / <?php echo (!empty($this->uri->segment(2))?ucwords(str_replace(array("_","controller"), " ", $this->uri->segment(2))):null) ?></h1>
+                        <h1><?php echo (!empty($title)?$title:null) ?> / <?php echo (!empty($this->uri->segment(2))?ucwords(str_replace(array("_","controller"), " ", $this->uri->segment(2))):null) ?></h1>
                         <small><?php echo (!empty($title)?$title:null) ?></small>
                     </div>
                 </section>

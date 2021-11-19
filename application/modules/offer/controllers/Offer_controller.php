@@ -8,7 +8,7 @@ class Offer_controller extends MX_Controller {
         parent::__construct();
         $this->permission->module('offer')->redirect();
         $this->load->model(array(
-            'offer_model','price/price_model'
+            'offer_model','trip/price_model'
         ));      
     }
     

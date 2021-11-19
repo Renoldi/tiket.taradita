@@ -12,7 +12,7 @@ class Booking extends MX_Controller {
             'booking_model', 
             'country_model', 
             'passenger_model',
-            'price/price_model',
+            'trip/price_model',
             'website/website_model' 
 		));		 
 	}
@@ -1200,5 +1200,9 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
     } 
 
       
+    function package_update(){
+        $data=$this->booking_model->update_package();
+        echo json_encode($data);
+    }
 
 }

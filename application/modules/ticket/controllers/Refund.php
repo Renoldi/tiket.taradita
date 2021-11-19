@@ -9,7 +9,7 @@ class Refund extends MX_Controller {
 		
 		$this->load->model(array(
 			'refund_model',
-			'price/price_model'
+			'trip/price_model'
 		));		 
 	}
  

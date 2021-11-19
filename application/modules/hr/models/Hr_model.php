@@ -57,7 +57,6 @@ class Hr_model extends CI_Model {
 		return $this->db->select('*')	
 			->from('employee_type')
 			->order_by('type_id', 'desc')
-			->where('company_id', $this->session->userdata('company_id'))
 			->get()
 			->result();
 	}
@@ -89,7 +88,6 @@ class Hr_model extends CI_Model {
     public function catagory(){
     	$this->db->select('*');
     	$this->db->from('employee_type');
-		$this->db->where('company_id', $this->session->userdata('company_id'));
     	$query=$this->db->get();
     	$data=$query->result();
         $list[''] = display('select_option');
